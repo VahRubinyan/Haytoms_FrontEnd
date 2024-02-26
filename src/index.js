@@ -2,6 +2,7 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import { ROUTER } from "./router/routes";
+import "./index.css";
 //Pages
 import HomePage from "./pages/HomePage";
 
