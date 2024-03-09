@@ -1,5 +1,5 @@
 import { headerConfig } from "../../config";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -8,9 +8,9 @@ const Navbar = () => {
     <ul className="header-inner-navbar">
       {headerConfig.map((navLink) => {
         return (
-          <Link key={navLink.id}>
+          <Link key={navLink.id} to={navLink.link}>
             {navLink.name[lang]}
-            <ul>
+            {/* <ul>
               {navLink.genres.map((genre) => {
                 return (
                   <Link key={genre.id} to={genre.link}>
@@ -18,7 +18,7 @@ const Navbar = () => {
                   </Link>
                 );
               })}
-            </ul>
+            </ul> */}
           </Link>
         );
       })}
