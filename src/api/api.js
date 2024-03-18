@@ -9,7 +9,14 @@ const api = axios.create({
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   },
-  withCredentials: true,
+});
+
+const apiWithImgs = axios.create({
+  baseURL: APIUrl,
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${token}`,
+  },
 });
 
 //GET
@@ -25,7 +32,5 @@ export const getMovieById = async (id) => {
 //POST
 
 export const createMovie = async (data) => {
-  return await api.post(`/movies`, data, {
-    withCredentials: true,
-  });
+  return await apiWithImgs.post(`/movies`, data);
 };

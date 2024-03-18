@@ -8,18 +8,18 @@ const Navbar = () => {
     <ul className="header-inner-navbar">
       {headerConfig.map((navLink) => {
         return (
-          <Link key={navLink.id} to={navLink.link}>
+          <li key={navLink.id}>
             {navLink.name[lang]}
-            {/* <ul>
+            <ul>
               {navLink.genres.map((genre) => {
                 return (
-                  <Link key={genre.id} to={genre.link}>
-                    {genre[lang]}
-                  </Link>
+                  <li key={genre.id}>
+                    <Link to={genre.link}>{genre[lang]}</Link>
+                  </li>
                 );
               })}
-            </ul> */}
-          </Link>
+            </ul>
+          </li>
         );
       })}
     </ul>
