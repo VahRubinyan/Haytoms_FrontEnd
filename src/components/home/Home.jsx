@@ -2,10 +2,16 @@
 import "./Home.scss";
 
 import { createMovie } from "../../api/api";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MoviesSlider from "./movies-slider/MoviesSlider";
+import TodayEvents from "./today-events/TodayEvents";
+import { getMoviesThunk } from "../../redux/slices/MoviesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { months } from "../../config";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const [newMovieData, setNewMovieData] = useState({
     title: "",
     cover_picture: null,
@@ -21,6 +27,50 @@ const Home = () => {
     price: 0,
     age_limit: 0,
   });
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const movies = useSelector((state) => state.movies.movies.movies);
+  const loading = useSelector((state) => state.movies.moviesLoading);
+  const error = useSelector((state) => state.movies.moviesError);
+
+  useEffect(() => {
+    const intervalid = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 60000);
+
+    return () => clearInterval(intervalid);
+  }, []);
+
+  useEffect(() => {
+    async function getDataRequest() {
+      await dispatch(getMoviesThunk());
+    }
+    getDataRequest();
+  }, [dispatch]);
+
+  const onFilterEventsByToday = useCallback(
+    (movies) => {
+      return movies.filter((movie) => {
+        const time = movie.movie_dates[0].time.split(":");
+        let status = false;
+        const monthName = months[currentDate.getMonth()];
+        if (
+          currentDate.getHours() === +time[0] &&
+          currentDate.getMinutes() < +time[1]
+        ) {
+          status = true;
+        } else if (currentDate.getHours() < +time[0]) {
+          status = true;
+        }
+        return (
+          monthName === movie.movie_dates[0].month &&
+          currentDate.getDate() === movie.movie_dates[0].day &&
+          status
+        );
+      });
+    },
+    [currentDate]
+  );
 
   const onChangeMovieData = (e) => {
     setNewMovieData((prev) => {
@@ -53,7 +103,18 @@ const Home = () => {
 
   return (
     <div className="home">
-      <MoviesSlider />
+      {movies && movies.length !== 0 && (
+        <>
+          <MoviesSlider movies={movies} />
+          <TodayEvents
+            data={onFilterEventsByToday(movies)}
+            loading={loading}
+            error={error}
+          />
+        </>
+      )}
+
+      {/* <div>{console.log(formatDate(currentDate, "yyyy/MM/dd kk:mm:ss"))}</div> */}
 
       <label htmlFor="title">title</label>
       <input

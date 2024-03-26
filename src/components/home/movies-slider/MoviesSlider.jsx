@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./MoviesSlider.scss";
 //
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getMoviesThunk } from "../../../redux/slices/MoviesSlice";
@@ -18,7 +17,7 @@ const MoviesSlider = () => {
 
   useEffect(() => {
     dispatch(getMoviesThunk());
-  }, []);
+  }, [dispatch]);
 
   let settings = {
     dots: false,
@@ -42,15 +41,19 @@ const MoviesSlider = () => {
             return (
               <div key={movie.id} className="item">
                 <div className="item-img">
-                  <img src={generateImage(movie.cover_picture)} />
+                  <img src={generateImage(movie.cover_picture)} alt="" />
                 </div>
                 <div className="item-info">
                   <h2>{movie.title}</h2>
                   <ul className="item-info-date">
-                    <li>{movie.movie_dates[0].month}</li>
-                    <li>{movie.movie_dates[0].day}</li>
-                    <li>{movie.movie_dates[0].day_of_week}</li>
-                    <li>{movie.movie_dates[0].time}</li>
+                    {movie.movie_dates.length !== 0 ? (
+                      <>
+                        <li>{movie.movie_dates[0].month}</li>
+                        <li>{movie.movie_dates[0].day}</li>
+                        <li>{movie.movie_dates[0].day_of_week}</li>
+                        <li>{movie.movie_dates[0].time}</li>
+                      </>
+                    ) : null}
                   </ul>
                 </div>
               </div>

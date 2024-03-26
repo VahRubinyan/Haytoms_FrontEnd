@@ -13,6 +13,7 @@ const initialState = {
   movies: [],
   moviesLoading: true,
   moviesError: false,
+  filteredEventsByToday: [],
 };
 
 const MoviesSlice = createSlice({
