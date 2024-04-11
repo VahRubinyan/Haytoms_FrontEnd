@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  lastVisitedMovie: 0,
-  movieOffset: 0,
+  lastVisitedEvent: 0,
+  eventOffset: 0,
 };
 
 const paginationSlice = createSlice({
   name: "pagination",
   initialState,
   reducers: {
-    changeMovieVisit(state, { payload }) {
-      state.lastVisitedMovie = payload;
+    changeEventVisit(state, { payload }) {
+      state.lastVisitedEvent = payload;
     },
-    changeMovieOffset(state, { payload }) {
-      state.movieOffset = payload;
+    changeEventOffset(state, { payload }) {
+      state.eventOffset = payload;
     },
   },
 });
 
-export const { changeMovieVisit, changeMovieOffset } = paginationSlice.actions;
+export const { changeEventVisit, changeEventOffset } = paginationSlice.actions;
 
 export default paginationSlice.reducer;

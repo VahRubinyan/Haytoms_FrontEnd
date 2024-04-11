@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MoviesReducer from "./slices/MoviesSlice";
+import EventsReducer from "./slices/EventsSlice";
 import paginationReducer from "./slices/paginationSlice";
 
 export default configureStore({
   reducer: {
-    movies: MoviesReducer,
+    events: EventsReducer,
     pagination: paginationReducer,
   },
 });

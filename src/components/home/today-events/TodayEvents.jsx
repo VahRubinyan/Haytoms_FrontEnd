@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "../../container/Container";
 import ReactPaginate from "react-paginate";
 import {
-  changeMovieOffset,
-  changeMovieVisit,
+  changeEventOffset,
+  changeEventVisit,
 } from "../../../redux/slices/paginationSlice";
 import TodayEventsList from "./TodayEventsList";
 import "../../../styles/Pagination.css";
 
 const TodayEvents = ({ data, loading, error }) => {
   const dispatch = useDispatch();
-  const forcePage = useSelector((state) => state.pagination.lastVisitedMovie);
-  const itemOffset = useSelector((state) => state.pagination.movieOffset);
+  const forcePage = useSelector((state) => state.pagination.lastVisitedEvent);
+  const itemOffset = useSelector((state) => state.pagination.eventOffset);
 
   let itemsPerPage = 10;
   const endOffset = itemOffset + itemsPerPage;
@@ -21,8 +21,8 @@ const TodayEvents = ({ data, loading, error }) => {
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % data.length;
-    dispatch(changeMovieOffset(newOffset));
-    dispatch(changeMovieVisit(event.selected));
+    dispatch(changeEventOffset(newOffset));
+    dispatch(changeEventVisit(event.selected));
   };
 
   return (

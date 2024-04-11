@@ -32,7 +32,7 @@ export const headerConfig = [
       {
         id: 2,
         am: "Մանկական",
-        en: "Kids movies",
+        en: "Kids events",
         ru: "Детское",
         link: "/",
       },

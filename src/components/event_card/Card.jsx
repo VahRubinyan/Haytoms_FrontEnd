@@ -1,20 +1,20 @@
-import { generateImage } from "../../utils/helpers/generateImage";
+import { generateCoverImage } from "../../utils/helpers/generateImage";
 import "./Card.scss";
 
-const Card = ({ movie }) => {
+const Card = ({ event }) => {
   return (
     <div className="card">
       <div className="card-image">
-        <img src={generateImage(movie.cover_picture)} alt="" />
+        <img src={generateCoverImage(event.cover_picture)} alt="" />
       </div>
-      <div className="card-title">{movie.title}</div>
+      <div className="card-title">{event.title}</div>
       <ul className="card-date">
-        {movie.movie_dates.length !== 0 ? (
+        {event.event_dates.length !== 0 ? (
           <>
-            <li>{movie.movie_dates[0].month}</li>
-            <li>{movie.movie_dates[0].day}</li>
-            <li>{movie.movie_dates[0].day_of_week}</li>
-            <li>{movie.movie_dates[0].time}</li>
+            <li>{event.event_dates[0].month}</li>
+            <li>{event.event_dates[0].day}</li>
+            <li>{event.event_dates[0].day_of_week}</li>
+            <li>{event.event_dates[0].time}</li>
           </>
         ) : null}
       </ul>

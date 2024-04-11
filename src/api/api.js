@@ -21,16 +21,16 @@ const apiWithImgs = axios.create({
 
 //GET
 
-export const getAllMovies = async () => {
-  return await api.get(`/movies`);
+export const getAllEvents = async () => {
+  return await api.get(`/events`);
 };
 
-export const getMovieById = async (id) => {
-  return await api.get(`/movies/${id}`);
+export const getEventById = async (id) => {
+  return await api.get(`/events/${id}`);
 };
 
 //POST
 
-export const createMovie = async (data) => {
-  return await apiWithImgs.post(`/movies`, data);
+export const createEvent = async (data) => {
+  return await apiWithImgs.post(`/events`, data);
 };

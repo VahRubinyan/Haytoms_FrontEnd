@@ -9,6 +9,7 @@ import "./index.css";
 import HomePage from "./pages/HomePage";
 import SignIn from "./components/sign/sign-in/SignIn";
 import SignUp from "./components/sign/sign-up/SignUp";
+import AddEventForm from "./components/add-event-form/AddEventForm";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: ROUTER.SIGNUPPAGE_ROUTE,
     element: <SignUp />,
+  },
+  {
+    path: ROUTER.ADDEVENTPAGE_ROUTE,
+    element: <AddEventForm />,
   },
 ]);
 
